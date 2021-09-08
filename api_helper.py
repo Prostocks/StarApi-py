@@ -1,4 +1,4 @@
-from StarWebApiUAT.StarApi import StarApi
+from NorenRestApiPy.NorenApi import NorenApi
 from threading import Timer
 import pandas as pd
 import time
@@ -16,10 +16,10 @@ def get_time(time_string):
     return time.mktime(data)
 
 
-class StarApiPy(StarApi):
+class StarApiPy(NorenApi):
 
     def __init__(self, *args, **kwargs):
-        super(StarApiPy, self).__init__(host='https://starapiuat.prostocks.com/NorenWClientTP', wsendpoint='wss://wsendpoint/')
+        super(StarApiPy, self).__init__(host='https://starapiuat.prostocks.com/NorenWClientTP', websocket='wss://wsendpoint/')
 
     symboldata = {}
 
