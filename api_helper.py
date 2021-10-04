@@ -20,7 +20,7 @@ class StarApiPy(NorenApi):
 
     def __init__(self, *args, **kwargs):
         super(StarApiPy, self).__init__(host='https://starapiuat.prostocks.com/NorenWClientTP', websocket='wss://starapiuat.prostocks.com/NorenWS/')
-
+        
     symboldata = {}
 
     def watch_time_price_series(self,exchange, token, starttime = None):
