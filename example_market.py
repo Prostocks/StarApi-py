@@ -30,7 +30,7 @@ def event_handler_quote_update(message):
     #c   Close price
     #ap  Average trade price
 
-    print("quote event: " + str(message))
+    print("quote event: {0}".format(time.strftime('%d-%m-%Y %H:%M:%S')) + str(message))
     
 
 def open_callback():
@@ -106,7 +106,11 @@ if ret != None:
             ret = api.get_security_info(exchange=exch, token=token)
             print(ret)
 
-            
+        elif prompt1 == 'm':
+            exch  = 'NSE'
+            token = '22'
+            ret = api.get_quotes(exchange=exch, token=token)
+            print(ret)
         elif prompt1 == 's':
             if socket_opened == True:
                 print('websocket already opened')
