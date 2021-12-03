@@ -71,6 +71,7 @@ ret = api.login(userid = cred['user'], password = cred['pwd'], twoFA=cred['facto
 if ret != None:   
     while True:
         print('f => find symbol')    
+        print('m => get quotes')
         print('p => contract info n properties')    
         print('v => get 1 min market data')
         print('s => start_websocket')

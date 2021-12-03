@@ -1,10 +1,7 @@
-from api_helper import StarApiPy, get_time
-import datetime
+from api_helper import StarApiPy
 import logging
-import time
-import pandas as pd
-import hashlib
 
+#enable dbug to see request and responses
 logging.basicConfig(level=logging.DEBUG)
 
 #start of our program
