@@ -119,12 +119,63 @@ retrieves the holdings as a list
 | --- | --- | --- | ---|
 | product_type | ```string``` | True | retreives the delivery holdings or for a given product  |
 
+the response is as follows,
+
+| Param | Type | Optional |Description |
+| --- | --- | --- | ---|
+|stat| ```string``` | False |Holding request success or failure indication.|
+
 #### <a name="md-get_positions"></a> get_positions()
 retrieves the positions cf and day as a list
 
 | Param | Type | Optional |Description |
 | --- | --- | --- | ---|
 |  No Parameters  |
+
+the response is as follows,
+
+| Param | Type | Optional |Description |
+| --- | --- | --- | ---|
+|stat| ```string``` | False |Position book success or failure indication.|
+|exch| ```string``` | False |Exchange segment|
+|tsym| ```string``` | False |Trading symbol / contract.|
+|token| ```string``` | False |Contract Token|
+|uid| ```string``` | False |User Id|
+|actid|```string``` | False | Account Id|
+|prd| ```string``` | False | Product name|
+|netqty| ```string``` | False | Net Position Quantity|
+|netavgprc| ```string``` | False | Net Position Average Price|
+|daybuyqty| ```string``` | False | Day Buy Quantity|
+|daysellqty| ```string``` | False | Day Sell Quantity|
+|daybuyavgprc| ```string``` | False | Day Buy Average Price|
+|daysellavgprc| ```string``` | False | Day Sell Average Price|
+|daybuyamt| ```string``` | False | Day Buy Amount|
+|daysellamt| ```string``` | False | Day Sell Amount|
+|cfbuyqty| ```string``` | False | Carry Forward Sell Quantity|
+|cforgavgprc| ```string``` | False | Original Average Price|
+|cfsellqty| ```string``` | False | Carry Forward Sell Quantity|
+|cfbuyavgprc| ```string``` | False | Carry Forward Buy Average Price|
+|cfsellavgprc| ```string``` | False | Carry Forward Sell Average Price|
+|cfbuyamt| ```string``` | False | Carry Forward Buy Amount|
+|cfsellamt| ```string``` | False | Carry Forward Sell Amount|
+|lp| ```string``` | False | LTP|
+|rpnl| ```string``` | False | Realized Profit and Loss|
+|urmtom| ```string``` | False | UnRealized Mark To Market (Can be recalculated in LTP update : = netqty * (lp from web socket - netavgprc) * prcftr |
+|bep| ```string``` | False | Breakeven Price|
+|openbuyqty| ```string``` | False | Open Buy Order Quantity |
+|opensellqty| ```string``` | False | Open Sell Order Quantity |
+|openbuyamt| ```string``` | False | Open Buy Order Amount |
+|opensellamt| ```string``` | False | Open Sell Order Amount|
+|openbuyavgprc| ```string``` | False ||
+|opensellavgprc| ```string``` | False ||
+|mult| ```string``` | False ||
+|pp| ```string``` | False ||
+|prcftr| ```string``` | False ||
+|ti| ```string``` | False ||
+|ls| ```string``` | False ||
+|request_time| ```string``` | False ||
+
+
 
 #### <a name="md-get_limits"></a> get_limits
 retrieves the margin and limits set
@@ -674,7 +725,7 @@ api.subscribe(['NSE|22', 'BSE|522032'])
 ```
     Place a Bracket Order as follows
 ```
-    api.place_order(buy_or_sell='B', product_type='H',
+    api.place_order(buy_or_sell='B', product_type='B',
                         exchange='NSE', tradingsymbol='INFY-EQ', 
                         quantity=1, discloseqty=0,price_type='LMT', price=1500, trigger_price=None,
                         retention='DAY', remarks='my_order_001', bookloss_price = 1490, bookprofit_price = 1510)

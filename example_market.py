@@ -1,4 +1,3 @@
-from NorenRestApiPy.NorenApi import PriceType, BuyorSell, ProductType
 from api_helper import StarApiPy, get_time
 
 import datetime
