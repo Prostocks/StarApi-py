@@ -15,12 +15,14 @@ to build this package and install it on your server please use
 ## API 
 class  ```StarApi```
 - [login](#md-login)
+- [logout](#md-logout)
 
 Symbols
 - [searchscrip](#md-searchscrip)
 - [get_security_info](#md-get_security_info)
 - [get_quotes](#md-get_quotes)
 - [get_time_price_series](#md-get_time_price_series)
+- [get_option_chain](#md-get_optionchain)
 
 Orders and Trades
 - [place_order](#md-place_order)
@@ -28,6 +30,7 @@ Orders and Trades
 - [cancel_order](#md-cancel_order)
 - [exit_order](#md-exit_order)
 - [get_orderbook](#md-get_orderbook)
+- [get_tradebook](#md-get_tradebook)
 - [get_singleorderhistory](#md-get_singleorderhistory)
 
 Holdings and Limits
@@ -57,6 +60,13 @@ connect to the broker, only once this function has returned successfully can any
 | api_secret | ```string``` | False | your secret   |
 | imei | ```string``` | False | imei identification |
 
+#### <a name="md-logout"></a> logout()
+Terminate the session
+
+| Param | Type | Optional |Description |
+| --- | --- | --- | ---|
+|  No Parameters  |
+
 #### <a name="md-place_order"></a> place_order(buy_or_sell, product_type,exchange, tradingsymbol, quantity, discloseqty, price_type, price=0.0, trigger_price=None, retention='DAY', amo='NO', remarks=None)
 place an order to oms
 
@@ -69,8 +79,8 @@ place an order to oms
 | quantity | ```integer``` | False | order quantity   |
 | discloseqty | ```integer``` | False | order disc qty |
 | price_type | ```string```| False | PriceType enum class |
-| price | ```integer```| False | Price in paise, 100.00 is sent as 10000 |
-| trigger_price | ```integer```| False | Price in paise |
+| price | ```double```| False | Price |
+| trigger_price | ```double```| False | Trigger Price |
 | retention | ```string```| False | DAY / IOC / EOS |
 | amo | ```string```| True | Flag for After Market Order, YES/NO  |
 | remarks | ```string```| True | client order id or free text   |
@@ -85,8 +95,8 @@ modify the quantity pricetype or price of an order
 | tradingsymbol | ```string``` | False | Unique id of contract on which order to be placed. (use url encoding to avoid special char error for symbols like M&M |
 | newquantity | ```integer``` | False | new order quantity   |
 | newprice_type | ```string```| False | PriceType enum class |
-| newprice | ```integer```| False | Price in paise, 100.00 is sent as 10000 |
-| newtrigger_price | ```integer```| False | Price in paise |
+| newprice | ```double```| False | Price |
+| newtrigger_price | ```double```| False | Trigger Price |
 
 #### <a name="md-cancel_order"></a> cancel_order(orderno)
 cancel an order
@@ -102,6 +112,20 @@ exits a cover or bracket order
 | --- | --- | --- | ---|
 | orderno | ```string``` | False | orderno with status open |
 | prd | ```string``` | False | Allowed for only H and B products (Cover order and bracket order)|
+
+#### <a name="md-get_orderbook"></a>  Order Book
+List of Orders placed for the account
+
+| Param | Type | Optional |Description |
+| --- | --- | --- | ---|
+|  No Parameters  |
+
+#### <a name="md-get_tradebook"></a>  Trade Book 
+List of Trades of the account
+
+| Param | Type | Optional |Description |
+| --- | --- | --- | ---|
+|  No Parameters  |
 
 
 #### <a name="md-get_singleorderhistory"></a>  single order history(orderno)
@@ -494,6 +518,35 @@ the response is as follows,
 | inoi | ```string``` | True | Interval oi change  |
 | oi | ```string``` | True | oi  |
 
+#### <a name="md-get_optionchain"></a> get_option_chain(exchange, tradingsymbol, strikeprice, count):
+gets the chart date for the symbol
+
+| Param | Type | Optional |Description |
+| --- | --- | --- | ---|
+| exchange | ```string``` | False | Exchange (UI need to check if exchange in NFO / CDS / MCX / or any other exchange which has options, if not don't allow)|
+| tradingsymbol | ```string``` | False | Trading symbol of any of the option or future. Option chain for that underlying will be returned. (use url encoding to avoid special char error for symbols like M&M)|
+| strikeprice | ```float``` | False | Mid price for option chain selection|
+| count | ```int``` | True | Number of strike to return on one side of the mid price for PUT and CALL.  (example cnt is 4, total 16 contracts will be returned, if cnt is is 5 total 20 contract will be returned)|
+
+the response is as follows,
+
+| Param | Type | Optional |Description |
+| --- | --- | --- | ---|
+| stat | ```string``` | True | ok or Not_ok |
+| values | ```string``` | True | properties of the scrip |
+| emsg | ```string``` | False | Error Message |
+
+| Param | Type | Optional |Description |
+| --- | --- | --- | ---|
+| exch | ```string``` | False | Exchange |
+| tsym | ```string``` | False | Trading Symbol of Contract |
+| token | ```string``` | False | Contract token |
+| optt | ```string``` | False | Option type |
+| strprc | ```string``` | False | Strike Price |
+| pp | ```string``` | False | Price Precision |
+| ti | ```string``` | False | Tick Size |
+| ls | ```string``` | False | Lot Size |
+
 #### <a name="md-start_websocket"></a> start_websocket()
 starts the websocket
 
@@ -507,8 +560,64 @@ starts the websocket
 #### <a name="md-subscribe_orders"></a> subscribe_orders()
 get order and trade update callbacks
 
+Subscription Acknowledgement:
+
+| Json Fields| Possible value| Description| 
+| --- | --- | --- |
+| t  |  ok |  ‘ok’ represents order update subscription acknowledgement | 
+
+Order Update subscription Updates :
+
+ | Json Fields | Possible value |  Description | 
+ | --- | --- | --- |
+ | t | om | ‘om’ represents touchline feed | 
+ | norenordno |   | Noren Order Number | 
+ | uid |   | User Id | 
+ | actid |   | Account ID | 
+ | exch |   | Exchange | 
+ | tsym |   | Trading symbol | 
+ | qty |   | Order quantity | 
+ | prc |   | Order Price | 
+ | prd |   | Product | 
+ | status |   | Order status (New, Replaced,  Complete, Rejected etc) | 
+ | reporttype |   | Order event for which this message is sent out. (Fill, Rejected, Canceled) | 
+ | trantype |   | Order transaction type, buy or sell | 
+ | prctyp |   | Order price type (LMT, MKT, SL-LMT, SL-MKT) | 
+ | ret |   | Order retention type (DAY, EOS, IOC,...) | 
+ | fillshares |   | Total Filled shares for this order | 
+ | avgprc |   | Average fill price | 
+ | fltm |   | Fill Time(present only when reporttype is Fill) | 
+ | flid |   | Fill ID (present only when reporttype is Fill) | 
+ | flqty |   | Fill Qty(present only when reporttype is Fill) | 
+ | flprc |   | Fill Price(present only when reporttype is Fill) | 
+ | rejreason |   | Order rejection reason, if rejected | 
+ | exchordid |   | Exchange Order ID | 
+ | cancelqty |   | Canceled quantity, in case of canceled order | 
+ | remarks |   | User added tag, while placing order | 
+ | dscqty |   | Disclosed quantity | 
+ | trgprc |   | Trigger price for SL orders | 
+ | snonum |   | This will be present for child orders in case of cover and bracket orders, if present needs to be sent during exit | 
+ | snoordt |   | This will be present for child orders in case of cover and bracket orders, it will indicate whether the order is profit or stoploss | 
+ | blprc |   | This will be present for cover and bracket parent order. This is the differential stop loss trigger price to be entered.  | 
+ | bpprc |   | This will be present for bracket parent order. This is the differential profit price to be entered.  | 
+ | trailprc |   | This will be present for cover and bracket parent order. This is required if trailing ticks is to be enabled. | 
+ | exch_tm |   | This will have the exchange update time | 
+
+
 #### <a name="md-subscribe"></a> subscribe([instruments])
 send a list of instruments to watch
+
+t='tk' is sent once on subscription for each instrument. this will have all the fields with the most recent value
+thereon t='tf' is sent for fields that have changed.
+```
+For example
+quote event: 03-12-2021 11:54:44{'t': 'tk', 'e': 'NSE', 'tk': '11630', 'ts': 'NTPC-EQ', 'pp': '2', 'ls': '1', 'ti': '0.05', 'lp': '118.55', 'h': '118.65', 'l': '118.10', 'ap': '118.39', 'v': '162220', 'bp1': '118.45', 'sp1': '118.50', 'bq1': '26', 'sq1': '6325'}
+quote event: 03-12-2021 11:54:45{'t': 'tf', 'e': 'NSE', 'tk': '11630', 'lp': '118.45', 'ap': '118.40', 'v': '166637', 'sp1': '118.55', 'bq1': '3135', 'sq1': '30'}
+quote event: 03-12-2021 11:54:46{'t': 'tf', 'e': 'NSE', 'tk': '11630', 'lp': '118.60'}
+```
+in the example above we see first message t='tk' with all the values, 2nd message has lasttradeprice avg price and few other fields with value changed.. note bp1 isnt sent as its still 118.45
+in the next tick ( 3rd message) only last price is changed to 118.6
+
 | Param | Type | Optional |Description |
 | --- | --- | --- | -----|
 | instruments | ```list``` | False | list of instruments [NSE\|22,CDS\|1] |
@@ -553,9 +662,13 @@ The call can be made to get the exchange provided token for a scrip or alternate
 Trading Symbol:
 
 SymbolName + ExpDate + 'F' for all data having InstrumentName starting with FUT
+
 SymbolName + ExpDate + 'P' + StrikePrice for all data having InstrumentName starting with OPT and with OptionType PE
+
 SymbolName + ExpDate + 'C' + StrikePrice for all data having InstrumentName starting with OPT and with OptionType C
+
 For MCX, F to be ignored for FUT instruments
+
 ```
 api.searchscrip(exchange='NSE', searchtext='REL')
 ```
