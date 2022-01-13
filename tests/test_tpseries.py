@@ -8,7 +8,7 @@ import timeit
 
 #supress debug messages for prod/tests
 #logging.basicConfig(level=logging.DEBUG)
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 
 #start of our program
@@ -40,6 +40,8 @@ if ret != None:
     elif datetime.date.weekday(lastBusDay) == 6:      #if it's Sunday
      lastBusDay = lastBusDay - datetime.timedelta(days = 2); #then make it Friday
 
+    lastBusDay = datetime.datetime.today()
+    lastBusDay = lastBusDay.replace(hour=0, minute=0, second=0, microsecond=0)
     print(lastBusDay.timestamp())
     #lastBusDay = 1639098000
 

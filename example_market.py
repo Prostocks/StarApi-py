@@ -129,7 +129,7 @@ if ret != None:
             print(ret)
         elif prompt1 == 'o':
             exch  = 'NFO'
-            tsym = 'COFORGE30DEC21F'
+            tsym = 'COFORGE'
             chain = api.get_option_chain(exchange=exch, tradingsymbol=tsym, strikeprice=3500, count=2)
 
             chainscrips = []
