@@ -19,6 +19,6 @@ def get_time(time_string):
 class StarApiPy(NorenApi):
     
     def __init__(self, *args, **kwargs):
-        super(StarApiPy, self).__init__(host='https://starapiuat.prostocks.com/NorenWClientTP', websocket='wss://starapiuat.prostocks.com/NorenWS/')
+        super(StarApiPy, self).__init__(host='https://starapiuat.prostocks.com/NorenWClientTP', websocket='wss://starapiuat.prostocks.com/NorenWS/', eodhost='https://star.prostocks.com/chartApi/getdata')
         
     

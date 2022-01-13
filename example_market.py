@@ -101,7 +101,7 @@ if ret != None:
 
         elif prompt1 == 'f':
             exch  = 'NFO'
-            query = 'COFORGE'
+            query = 'NIFTY'
             ret = api.searchscrip(exchange=exch, searchtext=query)
             print(ret)
 
@@ -129,7 +129,7 @@ if ret != None:
             print(ret)
         elif prompt1 == 'o':
             exch  = 'NFO'
-            tsym = 'COFORGE'
+            tsym = 'NIFTY27JAN22F'
             chain = api.get_option_chain(exchange=exch, tradingsymbol=tsym, strikeprice=3500, count=2)
 
             chainscrips = []
