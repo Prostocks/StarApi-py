@@ -5,30 +5,26 @@ import time
 import concurrent.futures
 
 api = None
-class Order:
-    def __init__(self):
-        self.buy_or_sell=''
-        self.product_type='C'
-        self.exchange=''
-        self.tradingsymbol='', 
-        self.quantity=0
-        self.discloseqty=0
-        self.price_type='LMT'
-        self.price=0.00
-        self.trigger_price=None
-        self.retention='DAY'
-        self.remarks=''
-        self.amo='NO'
-        self.bookloss_price = 0.0
-        self.bookprofit_price = 0.0
-        self.trail_price = 0.0
+class order:
+     def __init__(self, buy_or_sell:str, product_type:str,
+                 exchange: str, tradingsymbol:str, 
+                 price_type: str = 'LMT', quantity: int, price: float,trigger_price:float = None,
+                 retention:str = 'DAY', remarks: str = "tag",
+                 order_id:str):
+        self.buy_or_sell=buy_or_sell
+        self.product_type=product_type
+        self.exchange=exchange
+        self.tradingsymbol=tradingsymbol
+        self.quantity=quantity
+        self.discloseqty=discloseqty
+        self.price_type=price_type
+        self.price=price
+        self.trigger_price=trigger_price
+        self.retention=retention
+        self.remarks=remarks
+        self.order_id=None
 
-def place_order(order):
-    ret = api.place_order(buy_or_sell=order.buy_or_sell, product_type=order.product_type,
-                        exchange=order.exchange, tradingsymbol=order.tradingsymbol, 
-                        quantity=order.quantity, discloseqty=order.discloseqty, price_type=order.price_type, 
-                        price=order.price, trigger_price=order.trigger_price,
-                        retention=order.retention, remarks=order.remarks)
+
     #print(ret)
 
     return ret
@@ -45,6 +41,14 @@ class StarApiPy(NorenApi):
         super(StarApiPy, self).__init__(host='https://starapiuat.prostocks.com/NorenWClientTP', websocket='wss://starapiuat.prostocks.com/NorenWS/', eodhost='https://star.prostocks.com/chartApi/getdata')
         global api
         api = self
+
+    def place_order(self, order: order):
+        return api.place_order(buy_or_sell=order.buy_or_sell, product_type=order.product_type,
+                        exchange=order.exchange, tradingsymbol=order.tradingsymbol, 
+                        quantity=order.quantity, discloseqty=order.discloseqty, price_type=order.price_type, 
+                        price=order.price, trigger_price=order.trigger_price,
+                        retention=order.retention, remarks=order.remarks)
+
     def place_basket(self, orders):
         resp_err = 0
         resp_ok  = 0
