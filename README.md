@@ -1889,6 +1889,7 @@ Accept for t, e, and tk other fields may / may not be present.
 Depth Messages will be as below 
 
 |Json Fields|Possible value|Description|
+| --- | --- | --- | 
 |t|dk|‘dk’ represents depth acknowledgement|
 |e|NSE, BSE, NFO ..|Exchange name|
 |tk|22|Scrip Token|
