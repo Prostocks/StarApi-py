@@ -6,11 +6,12 @@ import concurrent.futures
 
 api = None
 class order:
-     def __init__(self, buy_or_sell:str, product_type:str,
-                 exchange: str, tradingsymbol:str, 
-                 price_type: str = 'LMT', quantity: int, price: float,trigger_price:float = None,
+     def __init__(self, buy_or_sell:str = None, product_type:str = None,
+                 exchange: str = None, tradingsymbol:str =None, 
+                 price_type: str = None, quantity: int = None, 
+                 price: float = None,trigger_price:float = None, discloseqty: int = 0,
                  retention:str = 'DAY', remarks: str = "tag",
-                 order_id:str):
+                 order_id:str = None):
         self.buy_or_sell=buy_or_sell
         self.product_type=product_type
         self.exchange=exchange
