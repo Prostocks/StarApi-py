@@ -55,7 +55,7 @@ class StarApiPy(NorenApi):
         resp_ok  = 0
         result   = []
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-            future_to_url = {executor.submit(place_order, order): order for order in  orders}
+            future_to_url = {executor.submit(placeOrder, order): order for order in  orders}
             for future in concurrent.futures.as_completed(future_to_url):
                 url = future_to_url[future]
             try:
