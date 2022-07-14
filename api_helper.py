@@ -42,7 +42,7 @@ class StarApiPy(NorenApi):
         global api
         api = self
 
-    def place_order(self, order: order):
+    def placeOrder(self, order: order):
         return api.place_order(buy_or_sell=order.buy_or_sell, product_type=order.product_type,
                         exchange=order.exchange, tradingsymbol=order.tradingsymbol, 
                         quantity=order.quantity, discloseqty=order.discloseqty, price_type=order.price_type, 
