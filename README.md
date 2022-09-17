@@ -18,7 +18,6 @@ class  ```StarApi```
 - [logout](#md-logout)
 
 Symbols
-- [scripmasters](#md-scripmasters)
 - [searchscrip](#md-searchscrip)
 - [get_security_info](#md-get_security_info)
 - [get_quotes](#md-get_quotes)
