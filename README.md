@@ -40,6 +40,10 @@ Holdings and Limits
 - [get_positions](#md-get_positions)
 - [get_limits](#md-get_limits)
 
+Calculators
+- [span_calculator](#md-span_calculator)
+- [get_option_greek](#md-get_option_greek)
+
 Websocket API
 - [start_websocket](#md-start_websocket)
 - [subscribe](#md-subscribe)
@@ -96,7 +100,7 @@ Response Details :
 |actid||Account id|
 |email||Email Id|
 |brkname||Broker id|
-|emsg||This will be present only if Login fails.|(Redirect to force change password if message is “Invalid Input : Password Expired” or “Invalid Input : Change Password”)|
+|emsg||This will be present only if Login fails.|(Redirect to force change password if message is ï¿½Invalid Input : Password Expiredï¿½ or ï¿½Invalid Input : Change Passwordï¿½)|
 
 
 Sample Success Response :
@@ -166,13 +170,13 @@ Request Details :
 | --- | --- | ---|
 |uid*||Logged in User Id|
 |actid*||Login users account ID|
-|exch*|NSE  / NFO / BSE / MCX|Exchange (Select from ‘exarr’ Array provided in User Details response)|
+|exch*|NSE  / NFO / BSE / MCX|Exchange (Select from ï¿½exarrï¿½ Array provided in User Details response)|
 |tsym*||Unique id of contract on which order to be placed. (use url encoding to avoid special char error for symbols like M&M)|
 |qty*||Order Quantity |
 |prc*||Order Price|
 |trgprc||Only to be sent in case of SL / SL-M order.|
 |dscqty||Disclosed quantity (Max 10% for NSE, and 50% for MCX)|
-|prd*|C / M / H|Product name (Select from ‘prarr’ Array provided in User Details response, and if same is allowed for selected, exchange. Show product display name, for user to select, and send corresponding prd in API call)|
+|prd*|C / M / H|Product name (Select from ï¿½prarrï¿½ Array provided in User Details response, and if same is allowed for selected, exchange. Show product display name, for user to select, and send corresponding prd in API call)|
 |trantype*|B / S|B -> BUY, S -> SELL|
 |prctyp*|LMT / MKT  / SL-LMT / SL-MKT / DS / 2L / 3L||||
 |ret*|DAY / EOS / IOC |Retention type (Show options as per allowed exchanges) |
@@ -181,7 +185,7 @@ Request Details :
 |bpprc||Book Profit Price applicable only if product is selected as B (Bracket order ) |
 |blprc||Book loss Price applicable only if product is selected as H and B (High Leverage and Bracket order ) |
 |trailprc||Trailing Price applicable only if product is selected as H and B (High Leverage and Bracket order ) |
-|amo||Yes , If not sent, of Not “Yes”, will be treated as Regular order. |
+|amo||Yes , If not sent, of Not ï¿½Yesï¿½, will be treated as Regular order. |
 |tsym2||Trading symbol of second leg, mandatory for price type 2L and 3L (use url encoding to avoid special char error for symbols like M&M)|
 |trantype2||Transaction type of second leg, mandatory for price type 2L and 3L|
 |qty2||Quantity for second leg, mandatory for price type 2L and 3L|
@@ -240,7 +244,7 @@ Request Details :
 |prctyp|LMT / MKT / SL-MKT / SL-LMT|This can be modified.|
 |prc||Modified / New price|
 |qty||Modified / New Quantity||Quantity to Fill / Order Qty - This is the total qty to be filled for the order. Its Open Qty/Pending Qty plus Filled Shares (cumulative for the order) for the order.|* Please do not send only the pending qty in this field|
-|tsym*||Unque id of contract on which order was placed. Can’t be modified, must be the same as that of original order. (use url encoding to avoid special char error for symbols like M&M)|
+|tsym*||Unque id of contract on which order was placed. Canï¿½t be modified, must be the same as that of original order. (use url encoding to avoid special char error for symbols like M&M)|
 |ret|DAY / IOC / EOS|New Retention type of the order |
 ||||
 |trgprc||New trigger price in case of SL-MKT or SL-LMT|
@@ -358,7 +362,7 @@ Request Details :
 |Json Fields|Possible value|Description|
 | --- | --- | ---|
 |exch*||Exchange|
-|tsym*||Unique id of contract on which order was placed. Can’t be modified, must be the same as that of original order. (use url encoding to avoid special char error for symbols like M&M)|
+|tsym*||Unique id of contract on which order was placed. Canï¿½t be modified, must be the same as that of original order. (use url encoding to avoid special char error for symbols like M&M)|
 |qty*||Quantity to be converted.|
 |uid*||User id of the logged in user.|
 |actid*||Account id|
@@ -457,42 +461,42 @@ Sample Success Output :
 Success response :
 [
       {
-“stat” : “Ok”,
-“exch” : “NSE” ,
-“tsym” : “ACC-EQ” ,
-“norenordno” : “20062500000001223”,
-               “prc” : “127230”,
-               “qty” : “100”,
-               “prd” : “C”,
-“status”: “Open”,
-               “trantype” : “B”,
- “prctyp” : ”LMT”,
-               “fillshares” : “0”,
-               “avgprc” : “0”,
-“exchordid” : “250620000000343421”,
- “uid” : “VIDYA”, 
- “actid” : “CLIENT1”,
- “ret” : “DAY”,
- “amo” : “Yes”
+ï¿½statï¿½ : ï¿½Okï¿½,
+ï¿½exchï¿½ : ï¿½NSEï¿½ ,
+ï¿½tsymï¿½ : ï¿½ACC-EQï¿½ ,
+ï¿½norenordnoï¿½ : ï¿½20062500000001223ï¿½,
+               ï¿½prcï¿½ : ï¿½127230ï¿½,
+               ï¿½qtyï¿½ : ï¿½100ï¿½,
+               ï¿½prdï¿½ : ï¿½Cï¿½,
+ï¿½statusï¿½: ï¿½Openï¿½,
+               ï¿½trantypeï¿½ : ï¿½Bï¿½,
+ ï¿½prctypï¿½ : ï¿½LMTï¿½,
+               ï¿½fillsharesï¿½ : ï¿½0ï¿½,
+               ï¿½avgprcï¿½ : ï¿½0ï¿½,
+ï¿½exchordidï¿½ : ï¿½250620000000343421ï¿½,
+ ï¿½uidï¿½ : ï¿½VIDYAï¿½, 
+ ï¿½actidï¿½ : ï¿½CLIENT1ï¿½,
+ ï¿½retï¿½ : ï¿½DAYï¿½,
+ ï¿½amoï¿½ : ï¿½Yesï¿½
      },
     {
-“stat” : “Ok”,
-“exch” : “NSE” ,
-“tsym” : “ABB-EQ” ,
-“norenordno” : “20062500000002543”,
-               “prc” : “127830”,
-            “qty” : “50”,
-               “prd” : “C”,
-“status”: “REJECT”,
-              “trantype” : “B”,
-“prctyp” : ”LMT”,
-             “fillshares” : “0”,
-             “avgprc” : “0”,
-              “rejreason” : “Insufficient funds”
-“uid” : “VIDYA”, 
-“actid” : “CLIENT1”,
-“ret” : “DAY”,
-“amo” : “No”
+ï¿½statï¿½ : ï¿½Okï¿½,
+ï¿½exchï¿½ : ï¿½NSEï¿½ ,
+ï¿½tsymï¿½ : ï¿½ABB-EQï¿½ ,
+ï¿½norenordnoï¿½ : ï¿½20062500000002543ï¿½,
+               ï¿½prcï¿½ : ï¿½127830ï¿½,
+            ï¿½qtyï¿½ : ï¿½50ï¿½,
+               ï¿½prdï¿½ : ï¿½Cï¿½,
+ï¿½statusï¿½: ï¿½REJECTï¿½,
+              ï¿½trantypeï¿½ : ï¿½Bï¿½,
+ï¿½prctypï¿½ : ï¿½LMTï¿½,
+             ï¿½fillsharesï¿½ : ï¿½0ï¿½,
+             ï¿½avgprcï¿½ : ï¿½0ï¿½,
+              ï¿½rejreasonï¿½ : ï¿½Insufficient fundsï¿½
+ï¿½uidï¿½ : ï¿½VIDYAï¿½, 
+ï¿½actidï¿½ : ï¿½CLIENT1ï¿½,
+ï¿½retï¿½ : ï¿½DAYï¿½,
+ï¿½amoï¿½ : ï¿½Noï¿½
     }
 ]
 
@@ -1169,6 +1173,124 @@ Sample Failure Response :
 Market Info
 
 
+#### <a name="md-span_calculator"></a> span_calculator(actid,positionlist)
+This calculates the margin requirement for a list of input positions.
+
+Example: 
+
+```
+ret = api.span_calculator(actid,positionlist)
+```
+Request Details :
+
+|Json Fields|Possible value|Description|
+| --- | --- | ---|
+|actid*||Any Account id, preferably actual account id if sending from post login screen.|
+|pos*||Array of json objects. (object fields given in below table)|
+
+Position structure as follows:
+
+|Json Fields|Possible value|Description|
+| --- | --- | ---|
+| prd | C / M / H  | Product | 
+|exch|NFO, CDS, MCX ...|Exchange|
+|instname|FUTSTK, FUTIDX, OPTSTK, FUTCUR...|Instrument name|
+|symname|USDINR, ACC, ABB,NIFTY.. |Symbol name|
+|exd|29-DEC-2022|DD-MMM-YYYY format|
+|optt|CE, PE|Option Type|
+|strprc|11900.00, 71.0025|Strike price|
+|buyqty||Buy Open Quantity|
+|sellqty||Sell Open Quantity|
+|netqty||Net traded quantity|
+
+
+Response Details :
+
+
+|Json Fields|Possible value|Description|
+| --- | --- | ---|
+|stat|Ok or Not_Ok|Market watch success or failure indication.|
+|span||Span value |
+|expo||IExposure margin|
+|span_trade||Span value ignoring input fields buyqty, sellqty|
+|expo_trade||Exposure margin ignoring input fields buyqty, sellqty|
+
+Sample Success Response :
+{
+    "request_time": "11:01:59 25-11-2022",
+    "stat": "Ok",
+    "span": "19416.00",
+    "expo": "4338.34",
+    "span_trade": "19416.00",
+    "expo_trade": "4338.34"
+}
+
+
+#### <a name="md-get_option_greek"></a>get_option_greek(expiredate,StrikePrice,SpotPrice,InitRate,Volatility,OptionType)
+Options greeeks computed the delta, thetha, vega , rho values.
+
+Example: 
+
+```
+ret = api.option_greek(expiredate ='24-NOV-2022',StrikePrice='150',SpotPrice  = '200',InitRate  = '100',Volatility = '10',OptionType='5')
+```
+Request Details :
+
+|Json Fields|Possible value|Description|
+| --- | --- | ---|
+|exd*||Expiry Date|
+|strprc*||Strike Price |
+|sptprc*||Spot Price|
+|int_rate*||Init Rate|
+|volatility*||Volatility|
+|optt||Option Type|
+
+Response Details :
+
+
+|Json Fields|Possible value|Description|
+| --- | --- | ---|
+|stat|Ok or Not_Ok|success or failure indication.|
+|request_time||This will be present only in a successful response.|
+|cal_price||Cal Price|
+|put_price||Put Price|
+|cal_delta||Cal Delta|
+|put_delta||Put Delta|
+|cal_gamma||Cal Gamma|
+|put_gamma||Put Gamma|
+|cal_theta||Cal Theta|
+|put_theta||Put Theta|
+|cal_delta||Cal Delta|
+|cal_rho||Cal Rho|
+|put_rho||Put Rho|
+|cal_vego||Cal Vego|
+|put_vego||Put Vego|
+
+Sample Success Response :
+ {
+"request_time":"17:22:58 28-07-2021",
+"stat":"OK",
+"cal_price":"1441",
+"put_price":"0.417071",
+"cal_delta":"0.997304",
+"put_delta":"-0.002696",
+"cal_gamma":"0.000001",
+"put_gamma":"0.000001",
+"cal_theta":"-31.535015",
+"put_theta":"-31.401346",
+"cal_rho":"0.000119",
+"put_rho":"-0.016590",
+"cal_vego":"0.006307",
+put_vego":"0.006307"
+  }
+
+Sample Failure Response :
+{
+ "stat":"Not_Ok",
+ "emsg":"Invalid Input :  jData is Missing."
+}
+
+
 #### <a name="md-searchscrip"></a> searchscrip(exchange, searchtext):
 Search for scrip or contract and its properties  
 
@@ -1272,7 +1394,7 @@ Request Details :
 | --- | --- | ---|
 |uid*||Logged in User Id|
 |stext*||Search Text|
-|exch||Exchange (Select from ‘exarr’ Array provided in User Details response)|
+|exch||Exchange (Select from ï¿½exarrï¿½ Array provided in User Details response)|
 
 Response Details :
 
@@ -1623,7 +1745,7 @@ Request Details :
 |token*|||
 |st||Start time (seconds since 1 jan 1970)|
 |et||End Time (seconds since 1 jan 1970)|
-|intrv|“1”, ”3”, “5”, “10”, “15”, “30”, “60”, “120”, “240”|Candle size in minutes (optional field, if not given assume to be “1”)|
+|intrv|ï¿½1ï¿½, ï¿½3ï¿½, ï¿½5ï¿½, ï¿½10ï¿½, ï¿½15ï¿½, ï¿½30ï¿½, ï¿½60ï¿½, ï¿½120ï¿½, ï¿½240ï¿½|Candle size in minutes (optional field, if not given assume to be ï¿½1ï¿½)|
 
 Response Details :
 
@@ -1774,13 +1896,13 @@ Subscription Acknowledgement:
 
 | Json Fields| Possible value| Description| 
 | --- | --- | --- |
-| t  |  ok |  ‘ok’ represents order update subscription acknowledgement | 
+| t  |  ok |  ï¿½okï¿½ represents order update subscription acknowledgement | 
 
 Order Update subscription Updates :
 
  | Json Fields | Possible value |  Description | 
  | --- | --- | --- |
- | t | om | ‘om’ represents touchline feed | 
+ | t | om | ï¿½omï¿½ represents touchline feed | 
  | norenordno |   | Noren Order Number | 
  | uid |   | User Id | 
  | actid |   | Account ID | 
@@ -1840,7 +1962,7 @@ Number of Acknowledgements for a single subscription will be the same as the num
 
 | Json Fields | Possible value | Description|
 | --- | --- | --- | 
-| t | tk |‘tk’ represents touchline acknowledgement |
+| t | tk |ï¿½tkï¿½ represents touchline acknowledgement |
 | e  |NSE, BSE, NFO ..|Exchange name | 
 | tk |22|Scrip Token |
 | pp |2 for NSE, BSE & 4 for CDS USDINR|Price precision  |
@@ -1868,7 +1990,7 @@ Accept for t, e, and tk other fields may / may not be present.
 
 | Json Fields | Possible value | Description|
 | --- | --- | --- | 
-| t | tf |‘tf’ represents touchline acknowledgement |
+| t | tf |ï¿½tfï¿½ represents touchline acknowledgement |
 | e  |NSE, BSE, NFO ..|Exchange name | 
 | tk | 22 |Scrip Token |
 | lp | |LTP |
@@ -1891,7 +2013,7 @@ Depth Messages will be as below
 
 |Json Fields|Possible value|Description|
 | --- | --- | --- | 
-|t|dk|‘dk’ represents depth acknowledgement|
+|t|dk|ï¿½dkï¿½ represents depth acknowledgement|
 |e|NSE, BSE, NFO ..|Exchange name|
 |tk|22|Scrip Token|
 |lp||LTP|
