@@ -1,5 +1,6 @@
-requests
-websocket_client
-./dist/NorenRestApiPy-0.0.22-py2.py3-none-any.whl
-pandas
-pyyaml
+requests==2.28.2
+websocket-client==1.5.1
+NorenRestApiPy==0.0.22
+pandas==1.5.3
+PyYAML==6.0
+
