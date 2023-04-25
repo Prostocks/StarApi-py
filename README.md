@@ -1,6 +1,14 @@
 # StarAPI
 
 Api used to connect to StarUAT
+
+Note:
+Current reference files are default for StarUAT environment (Not for the live environment) below are the recommandation steps to change from StarUAT env to Star Live env trading.
+1. Factor2 authentication should be changed to TOTP whereas in StarUAT you should use your PAN card number.
+2. Make sure vendor code matches in your python code and the vendor code provided by https://star.prostocks.com/
+3. APP Key change from StarUAT to StarLive
+4. In your local api_helper.py inside StarApiPy class, change the arguments for 'host' and 'websocket' to StarLive URLs provided inside Note2 of "Api Key Generation" page.
+
 ****
 
 ## Build
