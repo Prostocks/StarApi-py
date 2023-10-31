@@ -285,10 +285,10 @@ ret = api.cancel_order(orderno=orderno)
 
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|norenordno*||Noren order number, which needs to be modified|
-|uid*||User id of the logged in user.|
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|orderno|norenordno*||Noren order number, which needs to be modified|
+|Handled in Python wrapper|uid*||User id of the logged in user.|
 
 Response Details :
 
@@ -321,11 +321,11 @@ exits a cover or bracket order
 
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|norenordno*||Noren order number, which needs to be modified|
-|prd*|H / B |Allowed for only H and B products (Cover order and bracket order)|
-|uid*||User id of the logged in user.|
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|orderno|norenordno*||Noren order number, which needs to be modified|
+|product_type|prd*|H / B |Allowed for only H and B products (Cover order and bracket order)|
+|Handled in Python wrapper|uid*||User id of the logged in user.|
 
 Response Details :
 
@@ -354,18 +354,18 @@ ret = api.position_product_conversion(p['exch'], p['tsym'], p['netqty'], 'I', p[
 
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|exch*||Exchange|
-|tsym*||Unique id of contract on which order was placed. Can�t be modified, must be the same as that of original order. (use url encoding to avoid special char error for symbols like M&M)|
-|qty*||Quantity to be converted.|
-|uid*||User id of the logged in user.|
-|actid*||Account id|
-|prd*||Product to which the user wants to convert position. |
-|prevprd*||Original product of the position.|
-|trantype*||Transaction type|
-|postype*|Day / CF|Converting Day or Carry forward position|
-|ordersource|MOB |For Logging|
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|exchange|exch*||Exchange|
+|tradingsymbol|tsym*||Unique id of contract on which order was placed. Can�t be modified, must be the same as that of original order. (use url encoding to avoid special char error for symbols like M&M)|
+|quantity|qty*||Quantity to be converted.|
+|Handled in Python wrapper|uid*||User id of the logged in user.|
+|Handled in Python wrapper|actid*||Account id|
+|new_product_type|prd*||Product to which the user wants to convert position. |
+|previous_product_type|prevprd*||Original product of the position.|
+|buy_or_sell|trantype*||Transaction type|
+|day_or_cf|postype*|Day / CF|Converting Day or Carry forward position|
+|Handled in Python wrapper|ordersource|API|For Logging|
 
 Response Details :
 
@@ -398,10 +398,9 @@ print(ret)
 ```
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|uid*||Logged in User Id|
-|prd|H / M / ...|Product name|
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|Handled in Python wrapper|uid*||Logged in User Id|
 
 Response Details :
 
@@ -512,10 +511,10 @@ print(ret)
 
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|uid*||Logged in User Id|
-|actid*||Account Id of logged in user|
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|Handled in Python wrapper|uid*||Logged in User Id|
+|Handled in Python wrapper|actid*||Account Id of logged in user|
 
 Response Details :
 
@@ -625,10 +624,10 @@ ret = api.single_order_history(orderno=orderno)
 ```
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|uid*||Logged in User Id|
-|norenordno*||Noren Order Number|
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|Handled in Python wrapper|uid*||Logged in User Id|
+|orderno|norenordno*||Noren Order Number|
 
 
 Response Details :
@@ -790,11 +789,11 @@ ret = api.get_holdings()
 ```
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|uid*||Logged in User Id|
-|actid*||Account id of the logged in user.|
-|prd*||Product name|
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|Handled in Python wrapper|uid*||Logged in User Id|
+|Handled in Python wrapper|actid*||Account id of the logged in user.|
+|product_type|prd*||Product name|
 
 Response Details :
 Response data will be in json format with below fields in case of Success:
@@ -897,10 +896,10 @@ print(f'{day_m2m} is your Daily MTM')
 
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|uid*||Logged in User Id|
-|actid*||Account id of the logged in user.|
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|Handled in Python wrapper|uid*||Logged in User Id|
+|Handled in Python wrapper|actid*||Account id of the logged in user.|
 
 Response Details :
 
@@ -1010,7 +1009,7 @@ retrieves the margin and limits set
 
 Request Details:
 
-| Param | Type | Optional |Description |
+| Python Parameters | Type | Optional |Description |
 | --- | --- | --- | ---|
 | product_type | ```string``` | True | retreives the delivery holdings or for a given product  |
 | segment | ```string``` | True | CM / FO / FX  |
@@ -1178,10 +1177,10 @@ ret = api.span_calculator(actid,positionlist)
 ```
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|actid*||Any Account id, preferably actual account id if sending from post login screen.|
-|pos*||Array of json objects. (object fields given in below table)|
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|actid|actid*||Any Account id, preferably actual account id if sending from post login screen.|
+|positions|pos*||Array of json objects. (object fields given in below table)|
 
 Position structure as follows:
 
@@ -1231,14 +1230,14 @@ ret = api.option_greek(expiredate ='24-NOV-2022',StrikePrice='150',SpotPrice  = 
 ```
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|exd*||Expiry Date|
-|strprc*||Strike Price |
-|sptprc*||Spot Price|
-|int_rate*||Init Rate|
-|volatility*||Volatility|
-|optt||Option Type|
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|expiredate|exd*||Expiry Date|
+|StrikePrice|strprc*||Strike Price |
+|SpotPrice|sptprc*||Spot Price|
+|InterestRate|int_rate*||Init Rate|
+|Volatility|volatility*||Volatility|
+|OptionType|optt||Option Type|
 
 Response Details :
 
@@ -1385,11 +1384,11 @@ This will reply as following
 ```
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|uid*||Logged in User Id|
-|stext*||Search Text|
-|exch||Exchange (Select from �exarr� Array provided in User Details response)|
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|Handled in Python wrapper|uid*||Logged in User Id|
+|searchtext|stext*||Search Text|
+|exchange|exch||Exchange (Select from �exarr� Array provided in User Details response)|
 
 Response Details :
 
@@ -1496,11 +1495,11 @@ ret = api.get_security_info(exchange=exch, token=token)
 ```
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|uid*||Logged in User Id|
-|exch||Exchange |
-|token||Contract Token|
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|Handled in Python wrapper|uid*||Logged in User Id|
+|exchange|exch||Exchange |
+|token|token||Contract Token|
 
 Response Details :
 
@@ -1590,11 +1589,11 @@ ret = api.get_quotes(exchange=exch, token=token)
 
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|uid*||Logged in User Id|
-|exch||Exchange |
-|token||Contract Token|
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|Handled in Python wrapper|uid*||Logged in User Id|
+|exchange|exch||Exchange |
+|token|token||Contract Token|
 
 Response Details :
 
@@ -1853,11 +1852,12 @@ ret =api.get_daily_price_series(exchange="NSE",tradingsymbol="PAYTM-EQ",startdat
 ```
 Request Details :
 
-|Json Fields|Possible value|Description|
-| --- | --- | ---|
-|sym*||Symbol name|
-|from*||From date|
-|to*||To date |
+|Python Parameters|Json Fields|Possible value|Description|
+| --- | --- | --- | ---|
+|tradingsymbol|sym*||Symbol name|
+|exchange|||Exchange|
+|startdate|from*||From date|
+|enddate|to*||To date |
 
 Response Details :
 
@@ -1908,7 +1908,7 @@ Sample Success Response :
 
 gets the contracts of related strikes
 
-| Param | Type | Optional |Description |
+| Python Parameters | Type | Optional |Description |
 | --- | --- | --- | ---|
 | exchange | ```string``` | False | Exchange (UI need to check if exchange in NFO / CDS / MCX / or any other exchange which has options, if not don't allow)|
 | tradingsymbol | ```string``` | False | Trading symbol of any of the option or future. Option chain for that underlying will be returned. (use url encoding to avoid special char error for symbols like M&M)|
