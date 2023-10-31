@@ -134,7 +134,7 @@ ret = api.logout()
 
 Request Details :
 
-|Python Parameter|Json Fields|Possible value|Description|
+|Python Parameters|Json Fields|Possible value|Description|
 | --- | --- | --- | ---|
 |Handled in a Python wrapper|uid*||User Id of the login user|
 
@@ -172,7 +172,7 @@ ret = api.place_order(buy_or_sell='B', product_type='C',
 ```
 Request Details :
 
-|Python Parameter|Json Fields|Possible value|Description|
+|Python Parameters|Json Fields|Possible value|Description|
 | --- | --- | --- | ---|
 |Handled in Python wrapper|uid*||Logged in User Id|
 |Handled in Python wrapper|actid*||Login users account ID|
@@ -234,7 +234,7 @@ ret = api.modify_order(exchange='NSE', tradingsymbol='CANBK-EQ', orderno=orderno
 
 Request Details :
 
-|Python Parameter|Json Fields|Possible value|Description|
+|Python Parameters|Json Fields|Possible value|Description|
 | --- | --- | --- | ---|
 |exchange|exch*||Exchange|
 |orderno|norenordno*||Noren order number, which needs to be modified|
@@ -1733,7 +1733,7 @@ ret = api.get_time_price_series(exchange='NSE', token='22', starttime=lastBusDay
 ```
 Request Details :
 
-|Python Parameter|Json Fields|Possible value|Description|
+|Python Parameters|Json Fields|Possible value|Description|
 | --- | --- | --- | ---|
 |Handled in a Python wrapper|uid*||Logged in User Id|
 |exchange|exch*||Exchange|
