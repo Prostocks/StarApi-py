@@ -3,4 +3,5 @@ websocket-client==1.5.1
 NorenRestApiPy==0.0.22
 pandas==1.5.3
 PyYAML==6.0
+./dist/NorenRestApiPy-0.0.28-py2.py3-none-any.whl
 
